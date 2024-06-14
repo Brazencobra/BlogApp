@@ -15,3 +15,4 @@ C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.DAL\obj\Debug\net6.0\refint\B
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.DAL\obj\Debug\net6.0\BlogApp.DAL.pdb
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.DAL\obj\Debug\net6.0\BlogApp.DAL.genruntimeconfig.cache
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.DAL\obj\Debug\net6.0\ref\BlogApp.DAL.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.DAL\obj\Debug\net6.0\BlogApp.DAL.sourcelink.json

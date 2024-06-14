@@ -1,4 +1,8 @@
+using BlogApp.Business.Services.Implements;
+using BlogApp.Business.Services.Interfaces;
 using BlogApp.DAL.Contexts;
+using BlogApp.DAL.Repositories.Implements;
+using BlogApp.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.API
@@ -19,6 +23,8 @@ namespace BlogApp.API
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
             });
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

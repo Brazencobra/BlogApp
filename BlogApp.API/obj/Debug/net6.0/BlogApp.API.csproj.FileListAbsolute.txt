@@ -72,3 +72,4 @@ C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\BlogApp.
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\ref\BlogApp.API.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\Humanizer.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\BlogApp.API.sourcelink.json
