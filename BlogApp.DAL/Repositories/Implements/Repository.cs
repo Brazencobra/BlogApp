@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,8 +20,28 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     }
     public DbSet<TEntity> Table => _context.Set<TEntity>();
 
+    public IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> expression)
+    {
+        return Table.Where(expression);
+    }
+
+    public async Task<TEntity> FindByIdAsync(int id)
+    {
+        return await Table.FindAsync(id);
+    }
+
     public IQueryable<TEntity> GetAll()
     {
         return Table.AsQueryable();
+    }
+
+    public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression)
+    {
+        return await Table.SingleOrDefaultAsync(expression);
+    }
+
+    public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> expression)
+    {
+        return await Table.AnyAsync(expression);
     }
 }

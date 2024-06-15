@@ -1,4 +1,6 @@
-﻿using BlogApp.Business.Services.Interfaces;
+﻿using BlogApp.Business.Exceptions.Category;
+using BlogApp.Business.Exceptions.Common;
+using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
 using BlogApp.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,14 @@ namespace BlogApp.Business.Services.Implements
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _repo.GetAll().ToListAsync();
+        }
+
+        public async Task<Category> GetByIdAsync(int id)
+        {
+            if (id <= 0) throw new NegativeIdException();
+            var entity = await _repo.FindByIdAsync(id);
+            if(entity is null) throw new CategoryNotFoundException();
+            return entity;
         }
     }
 }
