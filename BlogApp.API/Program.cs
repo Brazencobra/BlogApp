@@ -1,8 +1,10 @@
+using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Business.Services.Implements;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.DAL.Contexts;
 using BlogApp.DAL.Repositories.Implements;
 using BlogApp.DAL.Repositories.Interfaces;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.API
@@ -16,6 +18,10 @@ namespace BlogApp.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssemblyContaining<CategoryCreateDto>();
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

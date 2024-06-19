@@ -1,4 +1,5 @@
-﻿using BlogApp.Core.Entities;
+﻿using BlogApp.Business.Dtos.CategoryDtos;
+using BlogApp.Core.Entities;
 
 namespace BlogApp.Business.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace BlogApp.Business.Services.Interfaces
     {
         Task<IEnumerable<Category>> GetAllAsync();
         Task<Category> GetByIdAsync(int id);
+        Task CreateAsync(CategoryCreateDto dto);
     }
 }

@@ -73,3 +73,6 @@ C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\ref\Blog
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\Humanizer.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\BlogApp.API.sourcelink.json
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.AspNetCore.dll

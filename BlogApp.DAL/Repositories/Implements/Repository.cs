@@ -20,6 +20,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     }
     public DbSet<TEntity> Table => _context.Set<TEntity>();
 
+    public async Task CreateAsync(TEntity entity)
+    {
+        await Table.AddAsync(entity);
+    }
+
     public IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> expression)
     {
         return Table.Where(expression);
@@ -43,5 +48,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> expression)
     {
         return await Table.AnyAsync(expression);
+    }
+
+    public async Task SaveAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }

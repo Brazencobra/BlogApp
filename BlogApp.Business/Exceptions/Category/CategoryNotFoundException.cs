@@ -10,6 +10,7 @@ namespace BlogApp.Business.Exceptions.Category
     {
         public CategoryNotFoundException() : base("Kateqoriya tapılmadı")
         {
+            
         }
 
         public CategoryNotFoundException(string? message) : base(message)
