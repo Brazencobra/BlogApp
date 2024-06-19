@@ -1,4 +1,5 @@
 using BlogApp.Business.Dtos.CategoryDtos;
+using BlogApp.Business.Profiles;
 using BlogApp.Business.Services.Implements;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.DAL.Contexts;
@@ -29,6 +30,7 @@ namespace BlogApp.API
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
             });
+            builder.Services.AddAutoMapper(typeof(CategoryMappingProfile).Assembly);
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             var app = builder.Build();

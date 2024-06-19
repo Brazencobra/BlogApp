@@ -17,7 +17,7 @@ namespace BlogApp.API.Controllers
         {
             _service = service;
         }
-         
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -41,13 +41,24 @@ namespace BlogApp.API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }   
+            }
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm]CategoryCreateDto dto)
+        public async Task<IActionResult> Post([FromForm] CategoryCreateDto dto)
         {
             await _service.CreateAsync(dto);
-            return NoContent();
+            return Ok(dto);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromForm] CategoryUpdateDto dto)
+        {
+            await _service.UpdateAsync(id, dto);
+            return Ok(dto);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok();
         }
     }
 }

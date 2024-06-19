@@ -76,3 +76,5 @@ C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\obj\Debug\net6.0\BlogApp.
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

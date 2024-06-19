@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "bWs6ggG54Pw=",
+  "dgSpecHash": "THwbI53k5dY=",
   "success": true,
   "projectFilePath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\husey\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\husey\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\husey\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\husey\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.2\\fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
     "C:\\Users\\husey\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
