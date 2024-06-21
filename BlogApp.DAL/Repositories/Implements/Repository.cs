@@ -33,7 +33,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public void Delete(TEntity entity)
     {
-        Table.Remove(entity);
+        _context.Remove(entity);
     }
 
     public IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> expression)

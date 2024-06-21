@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace BlogApp.Business.Services.Implements
 {
@@ -48,7 +49,8 @@ namespace BlogApp.Business.Services.Implements
         public async Task RemoveAsync(int id)
         {
             Category category = await _getCategoryAsync(id);
-            _repo.DeleteAsync(id);
+            _repo.Delete(category);
+            await _repo.SaveAsync();
         }
 
         public async Task UpdateAsync(int id, CategoryUpdateDto dto)

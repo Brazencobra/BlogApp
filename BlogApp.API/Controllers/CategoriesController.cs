@@ -4,6 +4,7 @@ using BlogApp.Business.Exceptions.Common;
 using BlogApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
 
 namespace BlogApp.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace BlogApp.API.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> Get()
         {
             return Ok(await _service.GetAllAsync());
@@ -43,7 +44,7 @@ namespace BlogApp.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<IActionResult> Post([FromForm] CategoryCreateDto dto)
         {
             await _service.CreateAsync(dto);
@@ -55,9 +56,10 @@ namespace BlogApp.API.Controllers
             await _service.UpdateAsync(id, dto);
             return Ok(dto);
         }
-        [HttpDelete]
+        [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)
         {
+            await _service.RemoveAsync(id);
             return Ok();
         }
     }

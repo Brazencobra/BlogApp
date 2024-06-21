@@ -1,11 +1,14 @@
 using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Business.Profiles;
+using BlogApp.Business;
 using BlogApp.Business.Services.Implements;
 using BlogApp.Business.Services.Interfaces;
+using BlogApp.Core.Entities;
 using BlogApp.DAL.Contexts;
 using BlogApp.DAL.Repositories.Implements;
 using BlogApp.DAL.Repositories.Interfaces;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.API
@@ -30,9 +33,15 @@ namespace BlogApp.API
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
             });
+            builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireUppercase = false;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             builder.Services.AddAutoMapper(typeof(CategoryMappingProfile).Assembly);
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddServices();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

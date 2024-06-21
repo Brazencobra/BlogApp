@@ -9,3 +9,5 @@ C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\BlogApp
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\refint\BlogApp.Core.dll
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\BlogApp.Core.pdb
 C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\ref\BlogApp.Core.dll
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\BlogApp.Core.csproj.AssemblyReference.cache
+C:\Users\husey\OneDrive\Masaüstü\BlogApp\BlogApp.Core\obj\Debug\net6.0\BlogApp.Core.sourcelink.json
