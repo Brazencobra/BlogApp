@@ -1,4 +1,5 @@
-﻿using BlogApp.Business.Services.Implements;
+﻿using BlogApp.Business.HelperServices.Interfaces;
+using BlogApp.Business.Services.Implements;
 using BlogApp.Business.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,7 @@ namespace BlogApp.Business
         {
             service.AddScoped<ICategoryService, CategoryService>();
             service.AddScoped<IUserService, UserService>();
+            service.AddScoped<ITokenHandler, ITokenHandler>();
         }
     }
 }

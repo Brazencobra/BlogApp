@@ -21,5 +21,10 @@ namespace BlogApp.API.Controllers
             await _service.RegisterAsync(dto);
             return Ok(dto);
         }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(LoginDto dto)
+        {
+            return Ok(await _service.LoginAsync(dto));
+        } 
     }
 }
