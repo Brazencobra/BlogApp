@@ -46,9 +46,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         return await Table.FindAsync(id);
     }
 
-    public IQueryable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAll(params string[] includes)
     {
-        return Table.AsQueryable();
+        var query = Table.AsQueryable();
+        foreach (var item in includes) 
+        {
+            query = query.Include(item);
+        }
+        return query;
     }
 
     public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression)

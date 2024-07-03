@@ -8,7 +8,7 @@ namespace BlogApp.Business.Exceptions.AppUser
 {
     public class RegisterFailedException : Exception
     {
-        public RegisterFailedException() : base("Qeydiyyat zamanı problem baş verdi")
+        public RegisterFailedException() : base("There was a problem during registration")
         {
         }
 
