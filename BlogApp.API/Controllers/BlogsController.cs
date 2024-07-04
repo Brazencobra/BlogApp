@@ -1,4 +1,6 @@
-﻿using BlogApp.Business.Services.Interfaces;
+﻿using BlogApp.Business.Dtos.BlogDtos;
+using BlogApp.Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +17,25 @@ namespace BlogApp.API.Controllers
             _blogService = blogService;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> Get()
         {
             return Ok(await _blogService.GetAllAsync());
+        }
+        [Authorize]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Post(BlogCreateDto dto)
+        {
+            try
+            {
+                await _blogService.CreateAsync(dto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

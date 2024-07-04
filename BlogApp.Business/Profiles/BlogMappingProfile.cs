@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogApp.Business.Dtos.BlogDtos;
+using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace BlogApp.Business.Profiles
             CreateMap<Blog , BlogDetailDto>();
             CreateMap<BlogUpdateDto, Blog>();
             CreateMap<BlogCreateDto , Blog>();
+            CreateMap<BlogCategory , BlogCategoryDto>();
         }
     }
 }
