@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj": {}
+    "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj": {
+    "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj",
         "projectName": "BlogApp.Business",
-        "projectPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj",
-        "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Business\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Business\\BlogApp.Business.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj": {
-                "projectPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj"
+              "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj"
               }
             }
           }
@@ -91,24 +90,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj": {
+    "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj",
         "projectName": "BlogApp.Core",
-        "projectPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj",
-        "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -117,7 +116,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -162,24 +160,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj": {
+    "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj",
         "projectName": "BlogApp.DAL",
-        "projectPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj",
-        "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.DAL\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\BlogApp.DAL.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -188,15 +186,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj": {
-                "projectPath": "C:\\Users\\husey\\OneDrive\\Masaüstü\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj"
+              "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\BlogApp\\BlogApp.Core\\BlogApp.Core.csproj"
               }
             }
           }
@@ -247,7 +244,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
