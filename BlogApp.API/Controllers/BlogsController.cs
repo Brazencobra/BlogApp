@@ -22,6 +22,11 @@ namespace BlogApp.API.Controllers
         {
             return Ok(await _blogService.GetAllAsync());
         }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _blogService.GetByIdAsync(id));
+        }
         [Authorize]
         [HttpPost("[action]")]
         public async Task<IActionResult> Post(BlogCreateDto dto)

@@ -3,6 +3,8 @@ using BlogApp.Business.Dtos.BlogDtos;
 using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Business.Exceptions.AppUser;
 using BlogApp.Business.Exceptions.Category;
+using BlogApp.Business.Exceptions.Common;
+using BlogApp.Business.HelperServices.HelperMethods;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
 using BlogApp.DAL.Repositories.Implements;
@@ -61,14 +63,22 @@ namespace BlogApp.Business.Services.Implements
             return _mapper.Map<IEnumerable<BlogListItemDto>>(entity);
         }
 
-        public Task<CategoryDetailDto> GetByIdAsync(int id)
+        public async Task<BlogDetailDto> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0) throw new NegativeIdException();
+            var blog = await _repo.FindByIdAsync(id);
+            if (blog is null) throw new NotFoundException<Blog>();
+            await _repo.SaveAsync();
+            return _mapper.Map<BlogDetailDto>(blog);
         }
 
-        public Task RemoveAsync(int id)
+        public async Task RemoveAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0) throw new NegativeIdException();
+            var blog = await _repo.FindByIdAsync(id);
+            if (blog is null) throw new NotFoundException<Blog>();
+            _repo.Delete(blog);
+            await _repo.SaveAsync();
         }
 
         public Task UpdateAsync(int id, BlogUpdateDto dto)

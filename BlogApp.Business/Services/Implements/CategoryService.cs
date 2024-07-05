@@ -69,7 +69,7 @@ namespace BlogApp.Business.Services.Implements
         {
             if (id <= 0) throw new NegativeIdException();
             var entity = await _repo.FindByIdAsync(id);
-            if (entity is null) throw new CategoryNotFoundException();
+            if (entity is null) throw new NotFoundException<Category>();
             return entity;
         }
     }

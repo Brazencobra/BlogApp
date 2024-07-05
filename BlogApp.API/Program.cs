@@ -107,7 +107,10 @@ namespace BlogApp.API
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(x =>
+                {
+                    x.ConfigObject.AdditionalItems.Add("persistAuthorization","true");
+                });
             }
 
             app.UseHttpsRedirection();

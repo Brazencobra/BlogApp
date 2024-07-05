@@ -26,8 +26,8 @@ namespace BlogApp.API.Controllers
         {
             return Ok(await _service.GetAllAsync());
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
