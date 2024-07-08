@@ -7,6 +7,7 @@ using BlogApp.Business.Exceptions.Common;
 using BlogApp.Business.HelperServices.HelperMethods;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
+using BlogApp.DAL.Contexts;
 using BlogApp.DAL.Repositories.Implements;
 using BlogApp.DAL.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +31,8 @@ namespace BlogApp.Business.Services.Implements
         readonly ICategoryRepository _categoryRepository;
         readonly string? userId;
         readonly UserManager<AppUser> _user;
-        public BlogService(IBlogRepository repository, IMapper mapper, IHttpContextAccessor context, ICategoryRepository categoryRepository, UserManager<AppUser> user)
+        readonly AppDbContext _dbcontext;
+        public BlogService(IBlogRepository repository, IMapper mapper, IHttpContextAccessor context, ICategoryRepository categoryRepository, UserManager<AppUser> user , AppDbContext dbContext)
         {
             _repo = repository;
             _mapper = mapper;
@@ -38,6 +40,7 @@ namespace BlogApp.Business.Services.Implements
             userId = _context.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             _categoryRepository = categoryRepository;
             _user = user;
+            _dbcontext = dbContext;
         }
         public async Task CreateAsync(BlogCreateDto dto)
         {
@@ -85,9 +88,28 @@ namespace BlogApp.Business.Services.Implements
             await _repo.SaveAsync();
         }
 
-        public Task UpdateAsync(int id, BlogUpdateDto dto)
+        public async Task UpdateAsync(int id, BlogUpdateDto dto)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException();
+            if (!await _user.Users.AnyAsync(u => u.Id == userId)) throw new UserNotFoundException();
+            if (id <= 0) throw new NegativeIdException();
+            Blog blog = await _repo.FindByIdAsync(id);
+            if (blog is null) throw new NotFoundException<Blog>();
+            List<BlogCategory> blogCategories = new();
+            if (dto.CategoryIds != null)
+            {
+                foreach (var item in dto.CategoryIds)
+                {
+                    var category = await _categoryRepository.FindByIdAsync(item);
+                    if (category is null) throw new CategoryNotFoundException($"{item} id-li kateqoriya tapılmadı");
+                    blogCategories.Add(new BlogCategory { Category = category, Blog = blog });
+                }
+            }
+            _dbcontext.BlogCategories.RemoveRange(_dbcontext.BlogCategories.Where(x => x.BlogId == id));
+            blog.AppUserId = userId;
+            blog.BlogCategories = blogCategories;
+            _mapper.Map(dto,blog);
+            await _repo.SaveAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BlogApp.Business.Dtos.BlogDtos;
+using BlogApp.Business.Dtos.CommentDtos;
 using BlogApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,12 @@ namespace BlogApp.API.Controllers
     public class BlogsController : ControllerBase
     {
         readonly IBlogService _blogService;
+        readonly ICommentService _commentService;
 
-        public BlogsController(IBlogService blogService)
+        public BlogsController(IBlogService blogService, ICommentService commentService)
         {
             _blogService = blogService;
+            _commentService = commentService;
         }
 
         [HttpGet("[action]")]
@@ -31,22 +34,28 @@ namespace BlogApp.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Post(BlogCreateDto dto)
         {
-            try
-            {
-                await _blogService.CreateAsync(dto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            await _blogService.CreateAsync(dto);
+            return Ok();
+        }
+        [Authorize]
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Put(int id,BlogUpdateDto dto)
+        {
+            await _blogService.UpdateAsync(id,dto);
+            return Ok();
         }
         [Authorize]
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)
         {
             await _blogService.RemoveAsync(id);
+            return Ok();
+        }
+        [Authorize]
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> Comment(int id,CommentCreateDto dto)
+        {
+            await _commentService.CreateAsync(id,dto);
             return Ok();
         }
     }

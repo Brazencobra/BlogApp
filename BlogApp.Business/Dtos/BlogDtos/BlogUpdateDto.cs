@@ -12,6 +12,7 @@ namespace BlogApp.Business.Dtos.BlogDtos
         public string Title { get; set; }
         public string Description { get; set; }
         public string? CoverImageUrl { get; set; }
+        public IEnumerable<int>? CategoryIds { get; set; }
     }
     public class BlogUpdateDtoValidator : AbstractValidator<BlogUpdateDto>
     {
@@ -29,6 +30,20 @@ namespace BlogApp.Business.Dtos.BlogDtos
                     .WithMessage("Boş ola bilməz")
                 .NotEmpty()
                     .WithMessage("Boş ola bilməz");
+            RuleFor(x => x)
+                .Custom(CheckRepeatId);
+        }
+        void CheckRepeatId(BlogUpdateDto dto, ValidationContext<BlogUpdateDto> context)
+        {
+            HashSet<int> ids = new HashSet<int>();
+            foreach (var item in dto.CategoryIds)
+            {
+                if (ids.Contains(item))
+                {
+                    context.AddFailure("CategoryIds", "Bir kateqoriya yalnızca 1dəfə əlavə edilə bilər");
+                }
+                ids.Add(item);
+            }
         }
     }
 }
