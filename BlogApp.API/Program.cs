@@ -15,6 +15,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using BlogApp.DAL;
+using Microsoft.AspNetCore.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
+using BlogApp.API.Helpers;
 
 namespace BlogApp.API
 {
@@ -71,7 +74,7 @@ namespace BlogApp.API
             builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
-                opt.Password.RequiredLength = 8;
+                opt.Password.RequiredLength = 6;
                 opt.Password.RequireUppercase = false;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
@@ -116,6 +119,7 @@ namespace BlogApp.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCustomExceptionHandler();
 
             app.MapControllers();
 

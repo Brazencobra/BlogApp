@@ -29,22 +29,7 @@ namespace BlogApp.API.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                return Ok(await _service.GetByIdAsync(id));
-            }
-            catch (NegativeIdException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (CategoryNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+            return Ok(await _service.GetByIdAsync(id));
         }
         [HttpPost("[action]")]
         public async Task<IActionResult> Post([FromForm] CategoryCreateDto dto)

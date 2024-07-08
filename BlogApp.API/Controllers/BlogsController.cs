@@ -42,5 +42,12 @@ namespace BlogApp.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [Authorize]
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _blogService.RemoveAsync(id);
+            return Ok();
+        }
     }
 }

@@ -15,12 +15,12 @@ namespace BlogApp.Business.HelperServices.HelperMethods
     {
         readonly  IRepository<T> _repo;
 
-        //public Task<> GetExistEntityCheck( int id) 
-        //{
-        //    if (id <= 0) throw new NegativeIdException();
-        //    var entity =  _repo.FindByIdAsync(id);
-        //    if (entity is null) throw new NotFoundException<T>();
-        //    return entity;
-        //}
+        public Task<T> GetExistEntityCheck(int id)
+        {
+            if (id <= 0) throw new NegativeIdException();
+            var entity = _repo.FindByIdAsync(id);
+            if (entity is null) throw new NotFoundException<T>();
+            return entity;
+        }
     }
 }

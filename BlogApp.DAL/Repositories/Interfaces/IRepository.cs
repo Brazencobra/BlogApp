@@ -18,7 +18,9 @@ public interface IRepository<TEntity> where TEntity : BaseEntity, new()
     public Task<TEntity> GetSingleAsync(Expression<Func<TEntity , bool>> expression);
     public Task<bool> IsExistAsync(Expression<Func<TEntity , bool>> expression);
     public Task CreateAsync(TEntity entity);
-    public Task SaveAsync();    
+    public Task SaveAsync();
+    public void SoftDelete(TEntity entity);
+    public void ReverseSoftDelete(TEntity entity);
     public void Delete(TEntity entity);
     public Task DeleteAsync(int id);
 }

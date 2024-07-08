@@ -68,16 +68,20 @@ namespace BlogApp.Business.Services.Implements
             if (id <= 0) throw new NegativeIdException();
             var blog = await _repo.FindByIdAsync(id);
             if (blog is null) throw new NotFoundException<Blog>();
+            blog.ViewerCount++;
             await _repo.SaveAsync();
             return _mapper.Map<BlogDetailDto>(blog);
         }
 
         public async Task RemoveAsync(int id)
         {
+            if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException();
+            if(!await _user.Users.AnyAsync(u=>u.Id == userId)) throw new UserNotFoundException(); 
             if (id <= 0) throw new NegativeIdException();
             var blog = await _repo.FindByIdAsync(id);
             if (blog is null) throw new NotFoundException<Blog>();
-            _repo.Delete(blog);
+            if(blog.AppUserId != userId) throw new UserAccessException();
+            _repo.SoftDelete(blog);
             await _repo.SaveAsync();
         }
 
