@@ -36,29 +36,30 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         _context.Remove(entity);
     }
 
-    public IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> expression)
+    public IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> expression, params string[] includes)
     {
-        return Table.Where(expression);
+        return _getIncludes(Table,includes).Where(expression);
     }
 
-    public async Task<TEntity> FindByIdAsync(int id)
+    public async Task<TEntity> FindByIdAsync(int id, params string[] includes)
     {
-        return await Table.FindAsync(id);
+        if (includes.Length == 0)
+        {
+            return await Table.FindAsync(id);
+        }
+        var query = Table.AsQueryable();
+        return await _getIncludes(query,includes).SingleOrDefaultAsync(x=>x.Id == id);
     }
 
     public IQueryable<TEntity> GetAll(params string[] includes)
     {
         var query = Table.AsQueryable();
-        foreach (var item in includes) 
-        {
-            query = query.Include(item);
-        }
-        return query;
+        return _getIncludes(query, includes);
     }
 
-    public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression)
+    public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, params string[] includes)
     {
-        return await Table.SingleOrDefaultAsync(expression);
+        return await _getIncludes(Table,includes).SingleOrDefaultAsync(expression);
     }
 
     public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> expression)
@@ -81,5 +82,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     {
         entity.IsDeleted = false;
         await _context.SaveChangesAsync();
+    }
+    private IQueryable<TEntity> _getIncludes(IQueryable<TEntity> query,params string[] includes)
+    {
+        foreach (var item in includes)
+        {
+            query = query.Include(item);
+        }
+        return query;
     }
 }

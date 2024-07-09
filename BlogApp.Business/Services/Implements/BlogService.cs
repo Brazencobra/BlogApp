@@ -69,7 +69,7 @@ namespace BlogApp.Business.Services.Implements
         public async Task<BlogDetailDto> GetByIdAsync(int id)
         {
             if (id <= 0) throw new NegativeIdException();
-            var blog = await _repo.GetAll("AppUser" , "BlogCategories", "BlogCategories.Category", "Comments", "Comments.Children", "Comments.AppUser").SingleOrDefaultAsync(x=>x.Id == id);
+            var blog = await _repo.FindByIdAsync(id, "AppUser", "BlogCategories", "BlogCategories.Category", "Comments", "Comments.Children", "Comments.AppUser");
             if (blog is null) throw new NotFoundException<Blog>();
             blog.ViewerCount++;
             await _repo.SaveAsync();
