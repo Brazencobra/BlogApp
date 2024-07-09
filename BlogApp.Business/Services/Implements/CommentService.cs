@@ -40,6 +40,7 @@ namespace BlogApp.Business.Services.Implements
         {
             if (id <= 0) throw new NegativeIdException();
             if (!await _blogRepository.IsExistAsync(b => b.Id == id)) throw new NotFoundException<Blog>();
+            if(!await _repo.IsExistAsync(b=>b.Id == dto.ParentId)) throw new NotFoundException<Comment>();
             if (string.IsNullOrWhiteSpace(_userId)) throw new ArgumentNullException();
             if (!await _userManager.Users.AnyAsync(u => u.Id == _userId)) throw new UserNotFoundException();
             var comment = _mapper.Map<Comment>(dto);

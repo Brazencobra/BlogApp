@@ -1,4 +1,5 @@
-﻿using BlogApp.Business.Dtos.UserDtos;
+﻿using BlogApp.Business.Dtos.CommentDtos;
+using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace BlogApp.Business.Dtos.BlogDtos
         public bool IsDeleted { get; set; }
         public DateTime CreatedTime { get; set; }
         public AuthorDto AppUser { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<BlogCategoryDto> BlogCategories { get; set; }
+        public IEnumerable<CommentListItemDto> Comments { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Business.Dtos.CommentDtos
 {
-    public class CommentDetailDto
+    public record CommentDetailDto
     {
         public int Id { get; set; }
         public string Text { get; set; }

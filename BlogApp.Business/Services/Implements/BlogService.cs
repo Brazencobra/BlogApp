@@ -62,14 +62,14 @@ namespace BlogApp.Business.Services.Implements
 
         public async Task<IEnumerable<BlogListItemDto>> GetAllAsync()
         {
-            var entity = _repo.GetAll("AppUser","BlogCategories" , "BlogCategories.Category");
+            var entity = _repo.GetAll("AppUser","BlogCategories" , "BlogCategories.Category" , "Comments" , "Comments.Children" , "Comments.AppUser");
             return _mapper.Map<IEnumerable<BlogListItemDto>>(entity);
         }
 
         public async Task<BlogDetailDto> GetByIdAsync(int id)
         {
             if (id <= 0) throw new NegativeIdException();
-            var blog = await _repo.FindByIdAsync(id);
+            var blog = await _repo.GetAll("AppUser" , "BlogCategories", "BlogCategories.Category", "Comments", "Comments.Children", "Comments.AppUser").SingleOrDefaultAsync(x=>x.Id == id);
             if (blog is null) throw new NotFoundException<Blog>();
             blog.ViewerCount++;
             await _repo.SaveAsync();
