@@ -23,6 +23,7 @@ namespace BlogApp.Business
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<ITokenHandler, TokenHandler>();
             service.AddScoped<ICommentService , CommentService>();
+            service.AddScoped<IRoleService , RoleService>();
             service.AddHttpContextAccessor();
         }
     }

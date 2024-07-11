@@ -22,7 +22,7 @@ namespace BlogApp.Business.HelperServices.Implements
             _configuration = configuration;
         }
 
-        public TokenResponseDto CreateToken(AppUser user, int expires = 60)
+        public TokenResponseDto CreateToken(AppUser user, int expires = 300)
         {
             List<Claim> claims = new List<Claim>()
             {
@@ -39,7 +39,7 @@ namespace BlogApp.Business.HelperServices.Implements
                 _configuration["Jwt:Audience"],
                 claims,
                 DateTime.UtcNow,
-                DateTime.UtcNow.AddMinutes(60),
+                DateTime.UtcNow.AddMinutes(expires),
                 credentials);
             JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
             string token = jwtHandler.WriteToken(jwtSecurity);
