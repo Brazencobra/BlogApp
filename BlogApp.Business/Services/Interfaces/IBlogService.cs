@@ -1,5 +1,6 @@
 ﻿using BlogApp.Business.Dtos.BlogDtos;
 using BlogApp.Business.Dtos.CategoryDtos;
+using BlogApp.Core.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace BlogApp.Business.Services.Interfaces
         Task CreateAsync(BlogCreateDto dto);
         Task UpdateAsync(int id,BlogUpdateDto dto);
         Task RemoveAsync(int id);
+        Task ReactAsync(int id,Reactions reaction);
+        Task RemoveReactAsync(int id);
     }
 }

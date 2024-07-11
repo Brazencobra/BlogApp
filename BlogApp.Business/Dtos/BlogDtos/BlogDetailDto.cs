@@ -1,4 +1,5 @@
-﻿using BlogApp.Business.Dtos.CommentDtos;
+﻿using BlogApp.Business.Dtos.BlogReactionDtos;
+using BlogApp.Business.Dtos.CommentDtos;
 using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Core.Entities;
 using System;
@@ -16,10 +17,12 @@ namespace BlogApp.Business.Dtos.BlogDtos
         public string Description { get; set; }
         public string CoverImageUrl { get; set; }
         public int ViewerCount { get; set; }
+        public int ReactCount { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreatedTime { get; set; }
         public AuthorDto AppUser { get; set; }
         public IEnumerable<BlogCategoryDto> BlogCategories { get; set; }
         public IEnumerable<CommentListItemDto> Comments { get; set; }
+        public IEnumerable<BlogReactionListItemDto> BlogReactions { get; set; }
     }
 }

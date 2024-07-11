@@ -14,5 +14,6 @@ namespace BlogApp.Core.Entities
         public string? ImageUrl { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<BlogReaction> BlogReactions { get; set; }
     }
 }

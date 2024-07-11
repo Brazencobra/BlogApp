@@ -21,7 +21,7 @@ namespace BlogApp.DAL.Configurations
             builder.Property(b=>b.CoverImage)
                 .IsRequired();
             builder.Property(b => b.CreatedTime)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("getutcdate()");
             builder.HasOne(u => u.AppUser)
                 .WithMany(b => b.Blogs)
                 .HasForeignKey(b => b.AppUserId); 

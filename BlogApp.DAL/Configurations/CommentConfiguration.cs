@@ -16,7 +16,7 @@ namespace BlogApp.DAL.Configurations
             builder.Property(c => c.Text)
                 .IsRequired();
             builder.Property(c => c.CreatedDate)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("getutcdate()");
             builder.HasOne(c => c.Blog)
                 .WithMany(b => b.Comments)
                 .HasForeignKey(c => c.BlogId)

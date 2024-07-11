@@ -1,6 +1,7 @@
 ﻿using BlogApp.Business.Dtos.BlogDtos;
 using BlogApp.Business.Dtos.CommentDtos;
 using BlogApp.Business.Services.Interfaces;
+using BlogApp.Core.Entities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,20 @@ namespace BlogApp.API.Controllers
         public async Task<IActionResult> Comment(int id,CommentCreateDto dto)
         {
             await _commentService.CreateAsync(id,dto);
+            return Ok();
+        }
+        [Authorize]
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> React(int id, Reactions reaction)
+        {
+            await _blogService.ReactAsync(id, reaction);
+            return Ok();
+        }
+        [Authorize]
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> RemoveReact(int id)
+        {
+            await _blogService.RemoveReactAsync(id);
             return Ok();
         }
     }

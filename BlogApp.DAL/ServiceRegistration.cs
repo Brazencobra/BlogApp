@@ -19,6 +19,8 @@ namespace BlogApp.DAL
             service.AddScoped<IBlogRepository, BlogRepository>();
 
             service.AddScoped<ICommentRepository , CommentRepository>();
+
+            service.AddScoped<IBlogReactionRepository , BlogReactionRepository>();
         }
     }
 }
