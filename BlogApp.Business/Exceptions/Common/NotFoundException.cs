@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Business.Exceptions.Common
 {
-    public class NotFoundException<T> : Exception , IBaseException where T : BaseEntity , new()
+    public class NotFoundException<T> : Exception , IBaseException 
     {
         public int StatusCode => StatusCodes.Status404NotFound;
         public string ErrorMessage { get; }

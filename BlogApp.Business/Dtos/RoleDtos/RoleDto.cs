@@ -1,16 +1,14 @@
-﻿using BlogApp.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApp.Business.Services.Implements
+namespace BlogApp.Business.Dtos.RoleDtos
 {
-    public class RoleDetailDto
+    public record RoleDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public AppUser AppUser { get; set; }
     }
 }

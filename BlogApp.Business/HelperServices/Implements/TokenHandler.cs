@@ -1,6 +1,8 @@
 ﻿using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Business.HelperServices.Interfaces;
+using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -16,10 +18,16 @@ namespace BlogApp.Business.HelperServices.Implements
     public class TokenHandler : ITokenHandler
     {
         readonly IConfiguration _configuration;
+        readonly IRoleService _roleService;
+        readonly RoleManager<IdentityRole> _roleManager;
+        readonly UserManager<AppUser> _userManager;
 
-        public TokenHandler(IConfiguration configuration)
+        public TokenHandler(IConfiguration configuration, IRoleService roleService, RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
         {
             _configuration = configuration;
+            _roleService = roleService;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public TokenResponseDto CreateToken(AppUser user, int expires = 300)
@@ -32,6 +40,11 @@ namespace BlogApp.Business.HelperServices.Implements
                 new Claim(ClaimTypes.Surname,user.Surname),
                 new Claim(ClaimTypes.Email,user.Email)
             };
+            
+            foreach (var item in _userManager.GetRolesAsync(user).Result)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, item));
+            }
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SigningKey"]));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             JwtSecurityToken jwtSecurity = new JwtSecurityToken(

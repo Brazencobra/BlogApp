@@ -1,4 +1,5 @@
 ﻿using BlogApp.Business.Dtos.UserDtos;
+using BlogApp.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,8 @@ namespace BlogApp.Business.Services.Interfaces
     {
         Task RegisterAsync(RegisterDto dto);
         Task<TokenResponseDto> LoginAsync(LoginDto dto);
+        Task<ICollection<AppUserListItemDto>> GetAllAsync();
+        Task GiveRoleAsync(string userName, string roleName);
+        Task TakeRoleAsync(string userName, string roleName);
     }
 }

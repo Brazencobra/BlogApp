@@ -43,24 +43,11 @@ namespace BlogApp.API.Controllers
         }
         [Authorize]
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string roleName)
         {
-            await _roleService.RemoveAsync(id);
+            await _roleService.RemoveAsync(roleName);
             return Ok();
         }
-        [Authorize]
-        [HttpPost("[action]")]
-        public async Task<IActionResult> GiveRole(string userId,string roleId)
-        {
-            await _roleService.GiveRoleAsync(userId,roleId);
-            return Ok();
-        }
-        [Authorize]
-        [HttpPut("[action]")]
-        public async Task<IActionResult> TakeRole(string userId, string roleId)
-        {
-            await _roleService.TakeRoleAsync(userId, roleId);
-            return Ok();
-        }
+        
     }
 }

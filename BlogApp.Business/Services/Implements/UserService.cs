@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Business.Exceptions.AppUser;
+using BlogApp.Business.Exceptions.Common;
+using BlogApp.Business.Exceptions.Role;
 using BlogApp.Business.HelperServices.Interfaces;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
@@ -24,12 +26,33 @@ namespace BlogApp.Business.Services.Implements
         readonly UserManager<AppUser> _user;
         readonly IMapper _mapper;
         readonly ITokenHandler _tokenHandler;
-        public UserService(UserManager<AppUser> user, IMapper mapper, ITokenHandler tokenHandler)
+        readonly RoleManager<IdentityRole> _roleManager;
+        public UserService(UserManager<AppUser> user, IMapper mapper, ITokenHandler tokenHandler, RoleManager<IdentityRole> roleManager)
         {
             _user = user;
             _mapper = mapper;
             _tokenHandler = tokenHandler;
+            _roleManager = roleManager;
         }
+
+        public async Task<ICollection<AppUserListItemDto>> GetAllAsync()
+        {
+            ICollection<AppUserListItemDto> users = new List<AppUserListItemDto>();
+            foreach (var user in await _user.Users.ToListAsync())
+            {
+                users.Add(new AppUserListItemDto
+                {   
+                    Users = _mapper.Map<AuthorDto>(user),
+                    Roles = await _user.GetRolesAsync(user)
+                });
+            }
+            return users;
+        }
+        //public async Task<IEnumerable<AppUserListItemDto>> GetAllAsync()
+        //{
+        //    var users =  _user.Users.AsQueryable();
+        //    return _mapper.Map<IEnumerable<AppUserListItemDto>>(users);
+        //}
 
         public async Task<TokenResponseDto> LoginAsync(LoginDto dto)
         {
@@ -58,5 +81,42 @@ namespace BlogApp.Business.Services.Implements
                 throw new RegisterFailedException(sb.ToString().TrimEnd());
             }
         }
+
+        public async Task GiveRoleAsync(string userName, string roleName)
+        {
+            if (userName is null || roleName is null) throw new ArgumentNullException();
+            var user = await _user.Users.FirstOrDefaultAsync(x => x.UserName == userName) ?? throw new UserNotFoundException();
+            if(!await _roleManager.RoleExistsAsync(roleName)) throw new NotFoundException<IdentityRole>("Bele bir role movcud deyil");
+            var role = (await _roleManager.FindByNameAsync(roleName)).Name;
+            
+            var result = await _user.AddToRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in result.Errors)
+                {
+                    sb.Append(item.Description + " ");
+                }
+                throw new RoleCreateFailedException(sb.ToString());
+            }
+        }
+
+        public async Task TakeRoleAsync(string userName, string roleName)
+        {
+            if (userName is null || roleName is null) throw new ArgumentNullException();
+            var user = await _user.Users.FirstOrDefaultAsync(x => x.UserName == userName) ?? throw new UserNotFoundException();
+            var role = (await _roleManager.FindByNameAsync(roleName)).Name ?? throw new RoleIdException();
+            var result = await _user.RemoveFromRoleAsync(user, role);
+            if (!result.Succeeded)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in result.Errors)
+                {
+                    sb.Append(item.Description + " ");
+                }
+                throw new RoleCreateFailedException(sb.ToString());
+            }
+        }
+
     }
 }

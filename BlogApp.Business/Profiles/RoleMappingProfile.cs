@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BlogApp.Business.Dtos.RoleDtos;
 using BlogApp.Business.Services.Implements;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -14,6 +15,7 @@ namespace BlogApp.Business.Profiles
         public RoleMappingProfile()
         {
             CreateMap<IdentityRole,RoleDetailDto>().ReverseMap();
+            CreateMap<IdentityRole,RoleDto>().ReverseMap();
         }
     }
 }
