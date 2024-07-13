@@ -33,7 +33,7 @@ namespace BlogApp.API.Controllers
         }
         [Authorize]
         [HttpPost("[action]")]
-        public async Task<IActionResult> Post(BlogCreateDto dto)
+        public async Task<IActionResult> Post([FromBody]BlogCreateDto dto)
         {
             await _blogService.CreateAsync(dto);
             return Ok();

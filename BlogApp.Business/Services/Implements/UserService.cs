@@ -118,5 +118,13 @@ namespace BlogApp.Business.Services.Implements
             }
         }
 
+        public async Task<TokenResponseDto> LoginWithRefreshTokenAsync(string refreshToken)
+        {
+            if(string.IsNullOrEmpty(refreshToken)) throw new NegativeIdException();
+            var user = await _user.Users.SingleOrDefaultAsync(x => x.RefreshToken == refreshToken);
+            if (user is null) throw new NotFoundException<AppUser>(); 
+            if(user.RefreshTokenExpiresDate < DateTime.UtcNow) throw new RefreshTokenExpiredException();
+            return _tokenHandler.CreateToken(user);
+        }
     }
 }

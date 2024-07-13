@@ -11,5 +11,6 @@ namespace BlogApp.Business.HelperServices.Interfaces
     public interface ITokenHandler
     {
         TokenResponseDto CreateToken(AppUser user , int expires = 300);
+        string CreateRefreshToken();
     }
 }

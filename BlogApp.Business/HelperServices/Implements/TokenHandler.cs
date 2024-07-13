@@ -3,6 +3,7 @@ using BlogApp.Business.HelperServices.Interfaces;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +30,11 @@ namespace BlogApp.Business.HelperServices.Implements
             _roleService = roleService;
             _roleManager = roleManager;
             _userManager = userManager;
+        }
+
+        public string CreateRefreshToken()
+        {
+            return Guid.NewGuid().ToString();
         }
 
         public TokenResponseDto CreateToken(AppUser user, int expires = 300)
@@ -56,11 +63,27 @@ namespace BlogApp.Business.HelperServices.Implements
                 credentials);
             JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
             string token = jwtHandler.WriteToken(jwtSecurity);
+            string refreshToken = CreateRefreshToken();
+            var refreshTokenExpires = jwtSecurity.ValidTo.AddMinutes(expires / 3);
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiresDate = refreshTokenExpires;
+            var result =  _userManager.UpdateAsync(user);
+            if (!result.Result.Succeeded)
+            {
+                var sb = new StringBuilder();
+                foreach (var item in result.Result.Errors)
+                {
+                    sb.Append(item.Description + " ");
+                }
+                throw new Exception(sb.ToString());
+            }
             return new()
             {
                 Token = token,
                 Expires = jwtSecurity.ValidTo,
-                UserName = user.UserName
+                UserName = user.UserName,
+                RefreshToken = refreshToken,
+                RefreshTokenExpires = refreshTokenExpires
             };
         }
     }

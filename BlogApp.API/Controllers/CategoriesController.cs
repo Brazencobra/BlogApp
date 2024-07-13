@@ -1,6 +1,7 @@
 ﻿using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Business.Exceptions.Category;
 using BlogApp.Business.Exceptions.Common;
+using BlogApp.Business.HelperServices.Interfaces;
 using BlogApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +16,11 @@ namespace BlogApp.API.Controllers
     public class CategoriesController : ControllerBase
     {
         readonly ICategoryService _service;
-
-        public CategoriesController(ICategoryService service)
+        readonly ITokenHandler _token;
+        public CategoriesController(ICategoryService service, ITokenHandler token)
         {
             _service = service;
+            _token = token;
         }
 
         [HttpGet("[action]")]

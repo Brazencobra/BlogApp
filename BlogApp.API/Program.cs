@@ -18,6 +18,7 @@ using BlogApp.DAL;
 using Microsoft.AspNetCore.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 using BlogApp.API.Helpers;
+using BlogApp.Business.Hubs;
 
 namespace BlogApp.API
 {
@@ -32,6 +33,7 @@ namespace BlogApp.API
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+            builder.Services.AddSignalR();
             builder.Services.AddFluentValidation(opt =>
             {
                 opt.RegisterValidatorsFromAssemblyContaining<CategoryCreateDto>();
@@ -65,7 +67,6 @@ namespace BlogApp.API
                     }
                 });
             });
-
             builder.Services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
@@ -116,13 +117,14 @@ namespace BlogApp.API
                 });
             }
 
+
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCustomExceptionHandler();
 
             app.MapControllers();
-
+            app.MapHub<ChatHub>("chat-hub");
             app.Run();
         }
     }

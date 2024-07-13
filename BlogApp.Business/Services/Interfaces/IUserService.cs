@@ -12,6 +12,7 @@ namespace BlogApp.Business.Services.Interfaces
     {
         Task RegisterAsync(RegisterDto dto);
         Task<TokenResponseDto> LoginAsync(LoginDto dto);
+        Task<TokenResponseDto> LoginWithRefreshTokenAsync(string refreshToken);
         Task<ICollection<AppUserListItemDto>> GetAllAsync();
         Task GiveRoleAsync(string userName, string roleName);
         Task TakeRoleAsync(string userName, string roleName);
