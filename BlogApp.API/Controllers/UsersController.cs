@@ -37,5 +37,11 @@ namespace BlogApp.API.Controllers
             await _userService.TakeRoleAsync(userName, roleName);
             return Ok();
         }
+        [Authorize]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetInformation()
+        {
+            return Ok(await _userService.GetUserInformation());
+        }
     }
 }

@@ -7,6 +7,8 @@ using BlogApp.Business.HelperServices.Interfaces;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
 using BlogApp.DAL.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,12 +29,18 @@ namespace BlogApp.Business.Services.Implements
         readonly IMapper _mapper;
         readonly ITokenHandler _tokenHandler;
         readonly RoleManager<IdentityRole> _roleManager;
-        public UserService(UserManager<AppUser> user, IMapper mapper, ITokenHandler tokenHandler, RoleManager<IdentityRole> roleManager)
+        readonly IHttpContextAccessor _contextAccessor;
+        readonly string _userId;
+        readonly string _authorizationToken;
+        public UserService(UserManager<AppUser> user, IMapper mapper, ITokenHandler tokenHandler, RoleManager<IdentityRole> roleManager, IHttpContextAccessor contextAccessor)
         {
             _user = user;
             _mapper = mapper;
             _tokenHandler = tokenHandler;
             _roleManager = roleManager;
+            _contextAccessor = contextAccessor;
+            _userId = _contextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            _authorizationToken = _contextAccessor?.HttpContext?.Request?.Headers?["Authorization"].ToString();
         }
 
         public async Task<ICollection<AppUserListItemDto>> GetAllAsync()
@@ -125,6 +133,29 @@ namespace BlogApp.Business.Services.Implements
             if (user is null) throw new NotFoundException<AppUser>(); 
             if(user.RefreshTokenExpiresDate < DateTime.UtcNow) throw new RefreshTokenExpiredException();
             return _tokenHandler.CreateToken(user);
+        }
+
+        public async Task ResetPasswordAsync(string currentPassword,string newPassword)
+        {
+            var user = await _user.Users.FirstOrDefaultAsync(x => x.Id == _userId);
+            if (user is null) throw new NotFoundException<AppUser>();
+            var result = await _user.ChangePasswordAsync(user, currentPassword, newPassword);
+            if (!result.Succeeded)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in result.Errors)
+                {
+                    sb.Append(item.Description);
+                }
+                throw new Exception(sb.ToString());
+            }
+        }
+
+        public async Task<AppUserDetailDto> GetUserInformation()
+        {
+            var user = await _user.Users.FirstOrDefaultAsync(x=>x.Id == _userId);
+            if (user is null) throw new NotFoundException<AppUser>();
+            return _mapper.Map<AppUserDetailDto>(user);
         }
     }
 }

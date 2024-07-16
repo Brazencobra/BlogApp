@@ -1,5 +1,6 @@
 ﻿using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,12 @@ namespace BlogApp.API.Controllers
         public async Task<IActionResult> LoginWithRefreshToken(string refreshToken)
         {
             return Ok(await _service.LoginWithRefreshTokenAsync(refreshToken));
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ResetPassword(string currentPassword, string newPassword)
+        {
+            await _service.ResetPasswordAsync(currentPassword,newPassword);
+            return Ok();
         }
     }
 }
