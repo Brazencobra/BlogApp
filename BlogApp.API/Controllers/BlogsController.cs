@@ -46,12 +46,26 @@ namespace BlogApp.API.Controllers
             return Ok();
         }
         [Authorize]
-        [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpPatch("[action]")]
+        public async Task<IActionResult> ToggleDelete(int id)
         {
-            await _blogService.RemoveAsync(id);
+            await _blogService.ToggleDelete(id);
             return Ok();
         }
+        //[Authorize]
+        //[HttpPatch("[action]")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await _blogService.RemoveAsync(id);
+        //    return Ok();
+        //}
+        //[Authorize]
+        //[HttpPatch("[action]")]
+        //public async Task<IActionResult> ReverseDelete(int id)
+        //{
+        //    await _blogService.ReverseRemoveAsync(id);
+        //    return Ok();
+        //}
         [Authorize]
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> Comment(int id,CommentCreateDto dto)

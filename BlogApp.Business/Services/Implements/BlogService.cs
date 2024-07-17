@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,7 +80,17 @@ namespace BlogApp.Business.Services.Implements
             await _repo.SaveAsync();
             return _mapper.Map<BlogDetailDto>(blog);
         }
-
+        public async Task ToggleDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException();
+            if (!await _user.Users.AnyAsync(u => u.Id == userId)) throw new UserNotFoundException();
+            if (id <= 0) throw new NegativeIdException();
+            var blog = await _repo.FindByIdAsync(id);
+            if (blog is null) throw new NotFoundException<Blog>();
+            if (blog.AppUserId != userId) throw new UserAccessException();
+            blog.IsDeleted = !blog.IsDeleted;
+            await _repo.SaveAsync();
+        }
         public async Task RemoveAsync(int id)
         {
             if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException();
@@ -89,6 +100,17 @@ namespace BlogApp.Business.Services.Implements
             if (blog is null) throw new NotFoundException<Blog>();
             if(blog.AppUserId != userId) throw new UserAccessException();
             _repo.SoftDelete(blog);
+            await _repo.SaveAsync();
+        }
+        public async Task ReverseRemoveAsync(int id)
+        {
+            if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException();
+            if (!await _user.Users.AnyAsync(u => u.Id == userId)) throw new UserNotFoundException();
+            if (id <= 0) throw new NegativeIdException();
+            var blog = await _repo.FindByIdAsync(id);
+            if (blog is null) throw new NotFoundException<Blog>();
+            if (blog.AppUserId != userId) throw new UserAccessException();
+            _repo.ReverseSoftDelete(blog);
             await _repo.SaveAsync();
         }
 
@@ -145,5 +167,7 @@ namespace BlogApp.Business.Services.Implements
             _mapper.Map(dto,blog);
             await _repo.SaveAsync();
         }
+
+        
     }
 }

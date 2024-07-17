@@ -72,16 +72,19 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         await _context.SaveChangesAsync();
     }
 
+    public async void ToggleDelete(TEntity entity)
+    {
+        entity.IsDeleted = !entity.IsDeleted;
+    }
+
     public async void SoftDelete(TEntity entity)
     {
         entity.IsDeleted = true;
-        await _context.SaveChangesAsync();
     }
 
     public async void ReverseSoftDelete(TEntity entity)
     {
         entity.IsDeleted = false;
-        await _context.SaveChangesAsync();
     }
     private IQueryable<TEntity> _getIncludes(IQueryable<TEntity> query,params string[] includes)
     {

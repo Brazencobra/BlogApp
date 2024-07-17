@@ -15,7 +15,9 @@ namespace BlogApp.Business.Services.Interfaces
         Task<BlogDetailDto> GetByIdAsync(int id);
         Task CreateAsync(BlogCreateDto dto);
         Task UpdateAsync(int id,BlogUpdateDto dto);
+        Task ToggleDelete(int id);
         Task RemoveAsync(int id);
+        Task ReverseRemoveAsync(int id);
         Task ReactAsync(int id,Reactions reaction);
         Task RemoveReactAsync(int id);
     }

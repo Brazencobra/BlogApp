@@ -18,7 +18,9 @@ using BlogApp.DAL;
 using Microsoft.AspNetCore.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 using BlogApp.API.Helpers;
-using BlogApp.Business.Hubs;
+using BlogApp.API.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using BlogApp.API.Hubs.Interfaces;
 
 namespace BlogApp.API
 {
@@ -117,6 +119,12 @@ namespace BlogApp.API
                 });
             }
 
+            app.MapPost("Chat" , async (string message , IHubContext<ChatHub , IChatClient> context) =>
+            {
+                await context.Clients.All.ReceiveMessage(message);
+
+                return Results.NoContent();
+            });
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
@@ -124,7 +132,7 @@ namespace BlogApp.API
             app.UseCustomExceptionHandler();
 
             app.MapControllers();
-            app.MapHub<ChatHub>("chat-hub");
+            app.MapHub<ChatHub>("/chatHub");
             app.Run();
         }
     }
